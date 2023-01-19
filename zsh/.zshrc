@@ -32,4 +32,3 @@ zplug load
 # ls aliases
 alias ls="exa --icons"
 alias v="nvim"
-

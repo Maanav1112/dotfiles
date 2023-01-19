@@ -3,13 +3,13 @@
 * {
     /* `otf-font-awesome` is required to be installed for icons */
     font-family: TerminessTTF Nerd Font, sans-serif;
-    font-size: 12px;
+    font-size: 11px;
 }
 
 window#waybar {
-    background-color: @base;
+    background-color: #282828;
     border-bottom: @mantle;
-    color: @text;
+    color: #ebdbb2;
     transition-property: background-color;
     transition-duration: .5s;
 }
@@ -53,12 +53,14 @@ button:hover {
 
 #clock {
     background-color: @base;
-    color: @blue;
+    color: #458588;
 }
 
 #battery {
     background-color: @base;
     color: @green;
+    padding-left: 5;
+    padding-right: 5;
 }
 
 #battery.charging, #battery.plugged {
@@ -83,6 +85,8 @@ button:hover {
     animation-timing-function: linear;
     animation-iteration-count: infinite;
     animation-direction: alternate;
+    padding-left: 5;
+    padding-right: 5;
 }
 
 label:focus {
@@ -90,25 +94,21 @@ label:focus {
 }
 
 #cpu {
-    background-color: @base;
-    color: @rosewater;
+    color: #83a598;
 }
 
 #memory {
-    background-color: @base;
-    color: @mauve;
+    color: #d3869b;
 }
 
 #disk {
-    background-color: @base;
-    color: @pink;
+    color: #fb4934;
     padding-left: 5;
     padding-right: 5;
 }
 
 #backlight {
-    background-color: @base;
-    color: @flamingo;
+    color: #fabd2f;
     padding-left: 5;
     padding-right: 5;
 }
@@ -201,27 +201,25 @@ label:focus {
 #mpd {
     padding-right: 5;
     padding-left: 5;
-    background-color: @base;
-    color: @teal;
+    color: #8ec07c
 }
 
 #mpd.disconnected {
     padding-right: 5;
     padding-left: 5;
-    background-color: @base;
+    color: #8ec07c
 }
 
 #mpd.stopped {
     padding-right: 5;
     padding-left: 5;
-    background-color: @base;
+    color: #8ec07c
 }
 
 #mpd.paused {
     padding-right: 5;
     padding-left: 5;
-    background-color: @base;
-    color: @teal;
+    color: #8ec07c
 }
 
 #language {
