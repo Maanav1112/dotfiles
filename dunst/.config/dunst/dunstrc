@@ -1,0 +1,16 @@
+[global]
+frame_color = "#8AADF4"
+separator_color= frame
+font= "TerminessTTF Nerd Font 12"
+
+[urgency_low]
+background = "#282828"
+foreground = "#ebdbb2"
+
+[urgency_normal]
+background = "#282828"
+foreground = "#ebdbb2"
+
+[urgency_critical]
+foreground = "#CAD3F5"
+frame_color = "#F5A97F"
