@@ -1,0 +1,1 @@
+/home/maanav/.config/emacs/straight/repos/evil-escape/evil-escape.el

@@ -1,0 +1,1 @@
+/home/maanav/.config/emacs/straight/repos/evil-lion/evil-lion.el

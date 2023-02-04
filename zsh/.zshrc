@@ -15,7 +15,6 @@ compinit
 # zsh plugins
 source ~/.zplug/init.zsh
 
-zplug "spaceship-prompt/spaceship-prompt", use:spaceship.zsh, from:github, as:theme
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
 
 # Install plugins if there are plugins that have not been installed
@@ -33,3 +32,6 @@ zplug load
 # ls aliases
 alias ls="exa --icons"
 alias v="nvim"
+
+source ~/.zsh/catppuccin_mocha-zsh-syntax-highlighting.zsh
+eval "$(starship init zsh)"

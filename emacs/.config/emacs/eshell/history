@@ -1,0 +1,34 @@
+ls
+clear
+fish
+ls
+wget https://raw.githubusercontent.com/integral-dw/org-superstar-mode/master/org-superstar.el
+ls
+cd .config/emacs
+ls
+mkdir lisp
+mv org-superstar.el lisp/
+emacs init.el 
+cd
+mv ~/Downloads/Marshmallow.png ~/.config/emacs
+ls
+clear
+cd .config/emacs/
+ll
+ls
+bluetoothctl devices
+bluetoothctl connect 69:22:70:B8:65:7D
+pandoc -f org -t latex -o test.tex Thermodynamics.org
+cd ..
+cd 
+cp ~/.config/emacs/ ~/.config/emacs-old
+cp ~/.config/emacs/ ~/.config/emacs-old -r
+cp ~/.config/emacs/ ~/.config/emacs-old -r
+ncmpcpp 
+clear
+vshell
+clear
+ls
+clear
+zathura Scanned\ Document.pdf 
+blueberry-tray &

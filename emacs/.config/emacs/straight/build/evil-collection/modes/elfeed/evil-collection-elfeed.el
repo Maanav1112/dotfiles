@@ -1,0 +1,1 @@
+/home/maanav/.config/emacs/straight/repos/evil-collection/modes/elfeed/evil-collection-elfeed.el

@@ -1,0 +1,1 @@
+/home/maanav/.config/emacs/straight/repos/emacsql/sqlite/sqlite3.h

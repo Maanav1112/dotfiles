@@ -1,0 +1,1 @@
+/home/maanav/.config/emacs/straight/repos/f.el/f-shortdoc.el

@@ -1,0 +1,1 @@
+("~/notes/" "~/dotfiles/" "~/.config/slstatus/" "~/.config/dwmblocks/")

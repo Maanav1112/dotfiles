@@ -1,0 +1,1 @@
+/home/maanav/.config/emacs/straight/repos/themes/extensions/doom-themes-ext-org.el

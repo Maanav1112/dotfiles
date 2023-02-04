@@ -1,0 +1,1 @@
+/home/maanav/.config/emacs/straight/repos/org-excalidraw/org-excalidraw.el
