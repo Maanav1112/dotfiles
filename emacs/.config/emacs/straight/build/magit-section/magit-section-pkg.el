@@ -1,1 +1,0 @@
-/home/maanav/.config/emacs/straight/repos/magit/lisp/magit-section-pkg.el

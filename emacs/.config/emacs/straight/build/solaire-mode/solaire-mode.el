@@ -1,1 +1,0 @@
-/home/maanav/.config/emacs/straight/repos/emacs-solaire-mode/solaire-mode.el

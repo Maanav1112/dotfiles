@@ -1,1 +1,0 @@
-/home/maanav/.config/emacs/straight/repos/god-mode/god-mode-isearch.el

@@ -1,1 +1,0 @@
-/home/maanav/.config/emacs/straight/repos/rainbow-delimiters/rainbow-delimiters.el

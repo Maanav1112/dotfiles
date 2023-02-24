@@ -1,2 +1,0 @@
-;; Generated package description from org-notify.el  -*- no-byte-compile: t -*-
-(define-package "org-notify" "0.1.0" "Notifications for Org-mode" '((emacs "25.1")) :commit "3a9c55aabdd1204f032fc02fd64ef643e0f19ae6" :authors '(("Peter Münster" . "pmrb@free.fr")) :maintainer '("Peter Münster" . "pmrb@free.fr") :keywords '("notification" "todo-list" "alarm" "reminder" "pop-up" "calendar") :url "https://github.com/p-m/org-notify")

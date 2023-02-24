@@ -1,7 +1,7 @@
 [global]
 frame_color = "#8AADF4"
 separator_color= frame
-font= "TerminessTTF Nerd Font 12"
+font= "TerminessTTF Nerd Font 10"
 
 [urgency_low]
 background = "#282828"

@@ -1,1 +1,0 @@
-/home/maanav/.config/emacs/straight/repos/org-roam/extensions/org-roam-dailies.el

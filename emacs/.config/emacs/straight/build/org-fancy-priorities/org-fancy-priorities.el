@@ -1,1 +1,0 @@
-/home/maanav/.config/emacs/straight/repos/org-fancy-priorities/org-fancy-priorities.el
