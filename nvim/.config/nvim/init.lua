@@ -2,6 +2,7 @@ require("opts")
 require("bootstrap")
 require("plugins")
 require("plugins.lualine")
+require("plugins.treesitter")
 require("maps")
 require("Luasnip")
 vim.cmd [[colorscheme gruvbox-material]]

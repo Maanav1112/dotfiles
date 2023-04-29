@@ -9,7 +9,7 @@ require("lazy").setup({
       vim.fn["mkdp#util#install"]()
     end,
   },
-
+  {"nvim-orgmode/orgmode"},
   {'romgrk/barbar.nvim',
     dependencies = 'nvim-tree/nvim-web-devicons',
     init = function() vim.g.barbar_auto_setup = false end,
@@ -20,6 +20,7 @@ require("lazy").setup({
     version = '^1.0.0', -- optional: only update when a new 1.x version is released
   },
    'nvim-lualine/lualine.nvim',
+   'nvim-treesitter/nvim-treesitter',
    'sainnhe/gruvbox-material',
   {'akinsho/toggleterm.nvim', version = "*", config = true},
   {
