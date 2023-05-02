@@ -8,4 +8,5 @@ require("Luasnip")
 vim.cmd [[colorscheme gruvbox-material]]
 require("luasnip.loaders.from_lua").load({paths = "~/.config/nvim/LuaSnip/"})
 vim.g.vimtex_compiler_method = 'tectonic'
+vim.g.vimtex_view_method = 'zathura'
 
