@@ -3,12 +3,15 @@ require("lazy").setup({
   "catppuccin/nvim",
   "lervag/vimtex",
   {
+    "ixru/nvim-markdown",
     "iamcco/markdown-preview.nvim",
     ft = "markdown",
     build = function()
       vim.fn["mkdp#util#install"]()
     end,
   },
+  "xuhdev/vim-latex-live-preview",
+  "terrortylor/nvim-comment",
   {"nvim-orgmode/orgmode"},
   {'romgrk/barbar.nvim',
     dependencies = 'nvim-tree/nvim-web-devicons',

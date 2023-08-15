@@ -11,22 +11,6 @@ local rep = require("luasnip.extras").rep
 
 return {
 -- Latex snippets
-s({trig=";a", snippetType="autosnippet"},
-  {
-    t("\\alpha"),
-  }
-),
-s({trig="pg",},
-  fmt( -- the snippet code actually looks like the equation environment it produces.
-    [[
-    \textcolor{PineGreen}{<>}
-    ]],
-    -- the insert node is placed in the <> angle brackets
-    { i(1) },
-    -- this is where i specify that angle brackets are used as node positions.
-    { delimiters = "<>" }
-  )
-),
 -- section and subsection
 s({trig="s",},
   fmt( -- the snippet code actually looks like the equation environment it produces.
@@ -50,6 +34,22 @@ s({trig="ss",},
     { delimiters = "<>" }
   )
 ),
+s({trig=";a", snippetType="autosnippet"},
+  {
+    t("\\alpha"),
+  }
+),
+s({trig="pg",},
+  fmt( -- the snippet code actually looks like the equation environment it produces.
+    [[
+    \textcolor{PineGreen}{<>}
+    ]],
+    -- the insert node is placed in the <> angle brackets
+    { i(1) },
+    -- this is where i specify that angle brackets are used as node positions.
+    { delimiters = "<>" }
+  )
+),
 s({trig="eq", dscr="A LaTeX equation environment"},
   fmt( -- The snippet code actually looks like the equation environment it produces.
     [[
@@ -63,8 +63,8 @@ s({trig="eq", dscr="A LaTeX equation environment"},
     { delimiters = "<>" }
   )
 ),
-s({trig="i", dscr="A LaTeX equation environment"},
-  fmt( -- The snippet code actually looks like the equation environment it produces.
+s({trig="i", dscr="Italic text"},
+  fmt(
     [[
       \emph{<>}
     ]],
