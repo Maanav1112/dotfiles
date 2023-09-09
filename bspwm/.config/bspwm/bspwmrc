@@ -3,11 +3,12 @@ pgrep -x sxhkd > /dev/null || sxhkd &
 nitrogen --restore &
 polybar &
 nm-applet &
+emacs --daemon &
 
-bspc monitor -d 󰈹        󰇚 
+bspc monitor -d 1 2 3 4 5 
 
 bspc config border_width         2
-bspc config window_gap          30
+bspc config window_gap          40
 bspc config top_padding 30
 bspc config bottom_padding 10
 bspc config left_padding 10
