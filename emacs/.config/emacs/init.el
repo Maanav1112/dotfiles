@@ -32,24 +32,41 @@
   :bind
   (("C-x p" . 'visual-fill-column-mode)))
 
+(use-package doom-themes
+  :straight t
+  :config
+  ;; Global settings (defaults)
+  (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
+        doom-themes-enable-italic t) ; if nil, italics is universally disabled
+  (load-theme 'doom-tokyo-night t)
+
+  ;; Enable flashing mode-line on errors
+  (doom-themes-visual-bell-config)
+  ;; Enable custom neotree theme (all-the-icons must be installed!)
+  (doom-themes-neotree-config)
+  ;; or for treemacs users
+  (setq doom-themes-treemacs-theme "doom-palenight") ; use "doom-colors" for less minimal icon theme
+  (doom-themes-treemacs-config)
+  ;; Corrects (and improves) org-mode's native fontification.
+  (doom-themes-org-config))
 
 (straight-use-package
  '(nano-emacs :type git :host github :repo "rougier/nano-emacs"))
-(require 'nano)
-(require 'nano-layout)
-(require 'nano-colors)
-(require 'nano-theme)
-(nano-theme)
-(require 'nano-defaults)
-(require 'nano-session)
-(require 'nano-modeline)
-(require 'nano-bindings)
-(let ((inhibit-message t))
-  (message "Welcome to GNU Emacs / N Λ N O edition")
-  (message (format "Initialization time: %s" (emacs-init-time))))
+;; (require 'nano)
+;; (require 'nano-layout)
+;; (require 'nano-colors)
+;; (require 'nano-theme)
+;; (nano-theme)
+;; (require 'nano-defaults)
+;; (require 'nano-session)
+;; (require 'nano-modeline)
+;; (require 'nano-bindings)
+;; (let ((inhibit-message t))
+;;   (message "Welcome to GNU Emacs / N Λ N O edition")
+;;   (message (format "Initialization time: %s" (emacs-init-time))))
 
-(require 'nano-splash)
-(require 'nano-help)
+;; (require 'nano-splash)
+;; (require 'nano-help)
 (use-package evil-commentary 
 :straight t
 )
@@ -96,16 +113,16 @@
   :hook (company-mode . company-box-mode))
 
 (set-face-attribute 'default nil
-  :font "JetBrainsMono NF"
-  :height 100
+  :font "ProggyCleanTTCE Nerd Font"
+  :height 140
   :weight 'medium)
 (set-face-attribute 'variable-pitch nil
-  :font "JetBrainsMono NF"
-  :height 100
+  :font "ProggyCleanTTCE Nerd Font"
+  :height 140
   :weight 'medium)
 (set-face-attribute 'fixed-pitch nil
-  :font "JetBrainsMono NF"
-  :height 100
+  :font "ProggyCleanTTCE Nerd Font"
+  :height 140
   :weight 'medium)
 ;; Makes commented text and keywords italics.
 ;; This is working in emacsclient but not emacs.
@@ -118,10 +135,10 @@
 ;; This sets the default font on all graphical frames created after restarting Emacs.
 ;; Does the same thing as 'set-face-attribute default' above, but emacsclient fonts
 ;; are not right unless I also add this method of setting the default font.
-(add-to-list 'default-frame-alist '(font . "JetBrainsMono Nerd Font-10"))
+(add-to-list 'default-frame-alist '(font . "ProggyCleanTTCE Nerd Font-14"))
 
 ;; Uncomment the following line if line spacing needs adjusting.
-(setq-default line-spacing 0.5)
+(setq-default line-spacing 0.7)
 
 (use-package general
   :straight t
