@@ -38,17 +38,28 @@
   ;; Global settings (defaults)
   (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
         doom-themes-enable-italic t) ; if nil, italics is universally disabled
-  (load-theme 'doom-tokyo-night t)
-
-  ;; Enable flashing mode-line on errors
-  (doom-themes-visual-bell-config)
+  (load-theme 'doom-gruvbox t)
   ;; Enable custom neotree theme (all-the-icons must be installed!)
   (doom-themes-neotree-config)
   ;; or for treemacs users
-  (setq doom-themes-treemacs-theme "doom-palenight") ; use "doom-colors" for less minimal icon theme
+  (setq doom-themes-treemacs-theme "doom-gruvbox") ; use "doom-colors" for less minimal icon theme
   (doom-themes-treemacs-config)
   ;; Corrects (and improves) org-mode's native fontification.
   (doom-themes-org-config))
+
+(use-package centaur-tabs
+  :straight t
+  :config
+  (centaur-tabs-mode t)
+  :bind
+  ("C-<prior>" . centaur-tabs-backward)
+  ("C-<next>" . centaur-tabs-forward))
+(setq centaur-tabs-height 40)
+(setq centaur-tabs-set-icons t)
+(setq centaur-tabs-set-bar 'under)
+;; Note: If you're not using Spacmeacs, in order for the underline to display
+;; correctly you must add the following line:
+(setq x-underline-at-descent-line t)
 
 (straight-use-package
  '(nano-emacs :type git :host github :repo "rougier/nano-emacs"))
@@ -106,6 +117,10 @@
 (setq dashboard-center-content t)
 (setq dashboard-startup-banner "/home/maanav/.config/emacs/358760.jpg")
 
+(use-package org-kanban
+:straight t
+)
+
 (use-package company-box
   :straight t
   :after company
@@ -114,15 +129,15 @@
 
 (set-face-attribute 'default nil
   :font "ProggyCleanTTCE Nerd Font"
-  :height 140
+  :height 150
   :weight 'medium)
 (set-face-attribute 'variable-pitch nil
   :font "ProggyCleanTTCE Nerd Font"
-  :height 140
+  :height 150
   :weight 'medium)
 (set-face-attribute 'fixed-pitch nil
   :font "ProggyCleanTTCE Nerd Font"
-  :height 140
+  :height 150
   :weight 'medium)
 ;; Makes commented text and keywords italics.
 ;; This is working in emacsclient but not emacs.
@@ -135,10 +150,10 @@
 ;; This sets the default font on all graphical frames created after restarting Emacs.
 ;; Does the same thing as 'set-face-attribute default' above, but emacsclient fonts
 ;; are not right unless I also add this method of setting the default font.
-(add-to-list 'default-frame-alist '(font . "ProggyCleanTTCE Nerd Font-14"))
+(add-to-list 'default-frame-alist '(font . "ProggyCleanTTCE Nerd Font-15"))
 
 ;; Uncomment the following line if line spacing needs adjusting.
-(setq-default line-spacing 0.7)
+(setq-default line-spacing 1.0)
 
 (use-package general
   :straight t
@@ -168,8 +183,9 @@
 
 
 (dt/leader-keys
-    "m" '(:ignore t :wk "Org")
-    "m j" '(org-journal-open-current-journal-file :wk "Org journal current")
+    "j" '(:ignore t :wk "Org journal")
+    "j n" '(org-journal-new-entry :wk "Org journal new entry")
+    "j o" '(org-journal-open-current-journal-file :wk "Org journal open current entry")
 )
 
   (dt/leader-keys

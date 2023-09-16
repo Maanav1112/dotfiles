@@ -1,5 +1,5 @@
-import:
-  - "~/.config/alacritty/catppuccin/catppuccin-mocha.yml"
+#import:
+# - "~/.config/alacritty/catppuccin/catppuccin-mocha.yml"
 
 env:
   TERM: xterm-256color
@@ -34,6 +34,35 @@ window:
 # When true, bold text is drawn using the bright variant of colors.
 draw_bold_text_with_bright_colors: true
 
+# Colors (Gruvbox Material Medium Dark)
+colors:
+  # Default colors
+  primary:
+    background: '#282828'
+    foreground: '#d4be98'
+
+  # Normal colors
+  normal:
+    black:   '#3c3836'
+    red:     '#ea6962'
+    green:   '#a9b665'
+    yellow:  '#d8a657'
+    blue:    '#7daea3'
+    magenta: '#d3869b'
+    cyan:    '#89b482'
+    white:   '#d4be98'
+
+  # Bright colors (same as normal colors)
+  bright:
+    black:   '#3c3836'
+    red:     '#ea6962'
+    green:   '#a9b665'
+    yellow:  '#d8a657'
+    blue:    '#7daea3'
+    magenta: '#d3869b'
+    cyan:    '#89b482'
+    white:   '#d4be98'
+
 scrolling:
   history: 10000
   multiplier: 3
@@ -42,26 +71,26 @@ scrolling:
 font:
   # The normal (roman) font face to use.
   normal:
-    family: Iosevka Nerd Font
+    family: ProggyCleanTTCE Nerd Font
     style: Regular
 
   # The bold font face
   bold:
-    family: Iosevka Nerd Font
+    family: ProggyCleanTTCE Nerd Font
     style: Bold
 
   # The italic font face
   italic:
-    family: Iosevka Nerd Font
+    family: ProggyCleanTTCE Nerd Font
     style: Regular Italic
 
   # Point size of the font
-  size: 7.0
+  size: 9.0
   # Offset is the extra space around each character. offset.y can be thought of
   # as modifying the linespacing, and offset.x as modifying the letter spacing.
   offset:
     x: 0
-    y: 15
+    y: 20
 
   # Glyph offset determines the locations of the glyphs within their cells with
   # the default being at the bottom. Increase the x offset to move the glyph to
