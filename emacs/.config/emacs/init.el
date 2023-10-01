@@ -20,68 +20,6 @@
 (global-display-line-numbers-mode 1)
 (global-visual-line-mode t)
 
-(use-package pdf-tools
-:straight t
-)
-
-(use-package visual-fill-column
-  :straight t
-  :commands visual-fill-column-mode
-  :custom
-  (fill-column-enable-sensible-window-split t)
-  :bind
-  (("C-x p" . 'visual-fill-column-mode)))
-
-(use-package doom-themes
-  :straight t
-  :config
-  ;; Global settings (defaults)
-  (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
-        doom-themes-enable-italic t) ; if nil, italics is universally disabled
-  (load-theme 'doom-gruvbox t)
-  ;; Enable custom neotree theme (all-the-icons must be installed!)
-  (doom-themes-neotree-config)
-  ;; or for treemacs users
-  (setq doom-themes-treemacs-theme "doom-gruvbox") ; use "doom-colors" for less minimal icon theme
-  (doom-themes-treemacs-config)
-  ;; Corrects (and improves) org-mode's native fontification.
-  (doom-themes-org-config))
-
-(use-package centaur-tabs
-  :straight t
-  :config
-  (centaur-tabs-mode t)
-  :bind
-  ("C-<prior>" . centaur-tabs-backward)
-  ("C-<next>" . centaur-tabs-forward))
-(setq centaur-tabs-height 40)
-(setq centaur-tabs-set-icons t)
-(setq centaur-tabs-set-bar 'under)
-;; Note: If you're not using Spacmeacs, in order for the underline to display
-;; correctly you must add the following line:
-(setq x-underline-at-descent-line t)
-
-(straight-use-package
- '(nano-emacs :type git :host github :repo "rougier/nano-emacs"))
-;; (require 'nano)
-;; (require 'nano-layout)
-;; (require 'nano-colors)
-;; (require 'nano-theme)
-;; (nano-theme)
-;; (require 'nano-defaults)
-;; (require 'nano-session)
-;; (require 'nano-modeline)
-;; (require 'nano-bindings)
-;; (let ((inhibit-message t))
-;;   (message "Welcome to GNU Emacs / N Λ N O edition")
-;;   (message (format "Initialization time: %s" (emacs-init-time))))
-
-;; (require 'nano-splash)
-;; (require 'nano-help)
-(use-package evil-commentary 
-:straight t
-)
-(evil-commentary-mode)
 (use-package evil
   :straight t
     :init      ;; tweak evil's configuration before loading it
@@ -108,18 +46,6 @@
   (company-show-numbers t)
   (company-tooltip-align-annotations 't)
   (global-company-mode t))
-;; Or if you use use-package
-(use-package dashboard
-  :straight t
-  :config
-  (dashboard-setup-startup-hook))
-(setq initial-buffer-choice (lambda () (get-buffer-create "*dashboard*")))
-(setq dashboard-center-content t)
-(setq dashboard-startup-banner "/home/maanav/.config/emacs/358760.jpg")
-
-(use-package org-kanban
-:straight t
-)
 
 (use-package company-box
   :straight t
@@ -128,46 +54,51 @@
   :hook (company-mode . company-box-mode))
 
 (set-face-attribute 'default nil
-  :font "ProggyCleanTTCE Nerd Font"
-  :height 150
+  :font "scientifica"
+  :height 120
   :weight 'medium)
 (set-face-attribute 'variable-pitch nil
-  :font "ProggyCleanTTCE Nerd Font"
-  :height 150
+  :font "scientifica"
+  :height 120
   :weight 'medium)
 (set-face-attribute 'fixed-pitch nil
-  :font "ProggyCleanTTCE Nerd Font"
-  :height 150
+  :font "scientifica"
+  :height 120
   :weight 'medium)
-;; Makes commented text and keywords italics.
-;; This is working in emacsclient but not emacs.
-;; Your font must have an italic face available.
 (set-face-attribute 'font-lock-comment-face nil
   :slant 'italic)
 (set-face-attribute 'font-lock-keyword-face nil
   :slant 'italic)
+(add-to-list 'default-frame-alist '(font . "scientifica-12"))
+(setq-default line-spacing 1.50)
 
-;; This sets the default font on all graphical frames created after restarting Emacs.
-;; Does the same thing as 'set-face-attribute default' above, but emacsclient fonts
-;; are not right unless I also add this method of setting the default font.
-(add-to-list 'default-frame-alist '(font . "ProggyCleanTTCE Nerd Font-15"))
-
-;; Uncomment the following line if line spacing needs adjusting.
-(setq-default line-spacing 1.0)
-
+(use-package dashboard
+  :straight t
+  :init      ;; tweak dashboard config before loading it
+  (setq dashboard-set-heading-icons t)
+  (setq dashboard-set-file-icons t)
+  (setq dashboard-banner-logo-title "Emacs Is More Than A Text Editor!")
+  (setq dashboard-center-content t) ;; set to 't' for centered content
+  (setq dashboard-items '((recents . 5)
+                          (agenda . 5 )
+                          (bookmarks . 3)
+                          (registers . 3)))
+  :config
+  (dashboard-setup-startup-hook)
+  (dashboard-modify-heading-icons '((recents . "file-text")
+			      (bookmarks . "book"))))
+(setq dashboard-startup-banner nil)
+(setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
 (use-package general
   :straight t
   :config
   (general-evil-setup)
-
-  ;; set up 'SPC' as the global leader key
-  (general-create-definer dt/leader-keys
+  (general-create-definer leader-keys
     :states '(normal insert visual emacs)
     :keymaps 'override
     :prefix "SPC" ;; set leader
     :global-prefix "M-SPC") ;; access leader in insert mode
-
-  (dt/leader-keys
+  (leader-keys
     "." '(find-file :wk "Find file")
     "b" '(:ignore t :wk "buffer")
     "bb" '(switch-to-buffer :wk "Switch buffer")
@@ -176,19 +107,25 @@
     "bp" '(previous-buffer :wk "Previous buffer")
     "br" '(revert-buffer :wk "Reload buffer"))
 )
-  (dt/leader-keys
-    "gc" '(:ignore t :wk "Evil commentary")
-    "c" '(evil-commentary-open-line :wk "Org journal current")
+(leader-keys
+        "n" '(:ignore t :wk "org roam")
+        "n b" '(org-roam-buffer-toggle :wk "Org roam buffer toggle")
+        "n f" '(org-roam-node-find :wk "Org roam buffer toggle")
+        "n g" '(org-roam-graph :wk "Org roam graph")
+        "n i" '(org-roam-node-insert :wk "Org roam insert")
+        "n c" '(org-roam-capture :wk "Org roam capture")
+        "n j" '(org-roam-dailies-capture-today :wk "Org roam dailies")
+)
+(leader-keys
+    "m" '(:ignore t :wk "Org journal")
+    "m j" '(org-journal-open-current-journal-file :wk "Org journal current")
 )
 
-
-(dt/leader-keys
-    "j" '(:ignore t :wk "Org journal")
-    "j n" '(org-journal-new-entry :wk "Org journal new entry")
-    "j o" '(org-journal-open-current-journal-file :wk "Org journal open current entry")
+(leader-keys
+    "o" '(:ignore t :wk "Org" )
+    "o j" '(helm-org-rifle :wk "Org rifle")
 )
-
-  (dt/leader-keys
+  (leader-keys
     "t" '(:ignore t :wk "Toggle")
     "t e" '(eshell-toggle :wk "Toggle eshell")
     "t f" '(flycheck-mode :wk "Toggle flycheck")
@@ -197,24 +134,6 @@
     "t r" '(rainbow-mode :wk "Toggle rainbow mode")
     "t t" '(visual-line-mode :wk "Toggle truncated lines")
     "t v" '(vterm :wk "Toggle vterm"))
-
-(use-package toc-org
-  :straight t
-    :commands toc-org-enable
-    :init (add-hook 'org-mode-hook 'toc-org-enable))
-
-
-(add-hook 'org-mode-hook 'org-indent-mode)
-(use-package org-bullets
-  :straight t
-)
-(add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
-(use-package org-journal
-  :straight t
-)
-(setq org-journal-dir "~/notes/journal/")
-(setq org-journal-date-format "%A, %d %B %Y")
-
 
 (use-package which-key
   :straight t
@@ -235,10 +154,10 @@
 	  which-key-separator " → " ))
 
 (use-package doom-modeline
-  :straight t
-  :init (doom-modeline-mode 1))
-
+:straight t
+:init (doom-modeline-mode 1))
 (setq doom-modeline-height 40)
+
 
 (electric-indent-mode -1)
 (require 'org-tempo)
@@ -258,7 +177,6 @@
 (use-package ivy
   :straight t
   :bind
-  ;; ivy-resume resumes the last Ivy-based completion.
   (("C-c C-r" . ivy-resume)
    ("C-x B" . ivy-switch-buffer-other-window))
   :diminish
@@ -300,27 +218,22 @@
   :diminish
   :hook org-mode prog-mode)
 
-(straight-use-package 'catppuccin-theme)
-;;(load-theme 'catppuccin :no-confirm)
-;;(setq catppuccin-flavor 'macchiato)
-;;(catppuccin-reload)
+(use-package doom-themes
+  :straight t
+  :config
+  (setq doom-themes-enable-bold t    
+        doom-themes-enable-italic t) 
+  (load-theme 'doom-gruvbox t)
+  (doom-themes-visual-bell-config)
+  (doom-themes-treemacs-config)
+  (doom-themes-org-config))
 
 (use-package autothemer :straight t :ensure t)
-
-(straight-use-package
- '(pinerose-emacs
-   :host github
-   :repo "konrad1977/pinerose-emacs"
-   :branch "main"))
-;;(load-theme 'rose-pine t)
-
 (use-package treemacs
   :straight t
 )
 
 (setq calendar-week-start-day 1)
-(add-to-list 'org-agenda-files "~/notes/school.org")
-
 (use-package dired-open
   :straight t
   :config
@@ -340,17 +253,45 @@
     (evil-define-key 'normal peep-dired-mode-map (kbd "j") 'peep-dired-next-file)
     (evil-define-key 'normal peep-dired-mode-map (kbd "k") 'peep-dired-prev-file)
 )
-
-(defun my-org-faces ()
-    (set-face-attribute 'org-todo nil :height 0.8)
-    (set-face-attribute 'org-level-1 nil :height 1.8)
-    (set-face-attribute 'org-level-2 nil :height 1.6)
-    (set-face-attribute 'org-level-3 nil :height 1.4)
-)
-
-(add-hook 'org-mode-hook #'my-org-faces)
-(setq org-default-notes-file (concat org-directory "/notes/inbox.org"))
-
-(use-package autothemer 
+;; Org mode
+(use-package org-roam
+  :straight t
+ )
+(setq org-roam-directory (file-truename "~/notes/"))
+(org-roam-db-autosync-mode)
+(setq find-file-visit-truename t)
+(setq org-roam-dailies-directory "~/notes/journal/")
+(use-package org-bullets 
 :straight t
 )
+(add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+(use-package helm-org-rifle
+:straight t
+)
+(custom-set-faces
+ '(org-level-1 ((t (:inherit outline-1 :height 1.7))))
+ '(org-level-2 ((t (:inherit outline-2 :height 1.6))))
+ '(org-level-3 ((t (:inherit outline-3 :height 1.5))))
+ '(org-level-4 ((t (:inherit outline-4 :height 1.4))))
+ '(org-level-5 ((t (:inherit outline-5 :height 1.3))))
+ '(org-level-6 ((t (:inherit outline-5 :height 1.2))))
+ '(org-level-7 ((t (:inherit outline-5 :height 1.1)))))
+(setq backup-directory-alist '((".*" . "~/.local/share/Trash/files")))
+(add-to-list 'org-agenda-files "~/NEET.org")
+
+(use-package toc-org
+  :straight t
+    :commands toc-org-enable
+    :init (add-hook 'org-mode-hook 'toc-org-enable))
+
+
+(add-hook 'org-mode-hook 'org-indent-mode)
+(use-package org-bullets
+  :straight t
+)
+(add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+(use-package org-journal
+  :straight t
+)
+(setq org-journal-dir "~/notes/journal/")
+(setq org-journal-date-format "%A, %d %B %Y")

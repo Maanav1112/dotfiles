@@ -1,9 +1,17 @@
 require("lazy").setup({
   "folke/which-key.nvim",
   { "folke/neoconf.nvim", cmd = "Neoconf" },
+  "ms-jpq/chadtree",
+  "norcalli/nvim-colorizer.lua",
   "folke/neodev.nvim",
   "sainnhe/gruvbox-material",
   "akinsho/org-bullets.nvim",
+  {
+  "willothy/nvim-cokeline",
+  config = true
+},
+  "terrortylor/nvim-comment",
+  {'iamcco/markdown-preview.nvim'},
    {
     "nvim-lualine/lualine.nvim",
     event = "VeryLazy",

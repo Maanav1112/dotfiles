@@ -23,11 +23,11 @@ require("plugins")
 require("plugins.telescope")
 require("plugins.lualine")
 require("plugins.org")
+require("plugins.cokeline")
 
 --colorscheme
 vim.cmd.colorscheme "gruvbox-material"
-
+require'colorizer'.setup()
 vim.g.livepreview_previewer = 'zathura'
 vim.g.vimtex_view_method = 'zathura'
-
-
+require('nvim_comment').setup()
