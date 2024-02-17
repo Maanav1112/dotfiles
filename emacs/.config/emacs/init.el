@@ -10,16 +10,9 @@
       (goto-char (point-max))
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
+
 (straight-use-package 'org)
 (straight-use-package 'use-package)
-
-(custom-set-faces
-  '(org-level-1 ((t (:inherit outline-1 :height 2.0))))
-  '(org-level-2 ((t (:inherit outline-2 :height 1.8))))
-  '(org-level-3 ((t (:inherit outline-3 :height 1.6))))
-  '(org-level-4 ((t (:inherit outline-4 :height 1.4))))
-  '(org-level-5 ((t (:inherit outline-5 :height 1.0))))
-  )
 
 (menu-bar-mode -1)
 (tool-bar-mode -1)
@@ -27,17 +20,22 @@
 (global-display-line-numbers-mode 1)
 (global-visual-line-mode t)
 
-(straight-use-package
- '(nano-emacs :type git :host github :repo "rougier/nano-emacs"))
+(use-package doom-themes
+:straight t
+:config
+(setq doom-themes-enable-bold t)    
+(setq doom-themes-enable-italic t) 
+ (load-theme 'doom-one t)
+(doom-themes-visual-bell-config)
+(doom-themes-org-config)
+)
 
- ;;(use-package doom-themes
-;;:straight t
-;;:config
-;;(setq doom-themes-enable-bold t)    
-;;(setq doom-themes-enable-italic t) 
-;;(load-theme 'doom-gruvbox t)
-;;(doom-themes-visual-bell-config)
-;;(doom-themes-org-config))
+(use-package catppuccin-theme
+:straight t
+)
+;;(load-theme 'catppuccin :no-confirm)
+;;(setq catppuccin-flavor 'mocha) ;; or 'latte, 'macchiato, or 'mocha
+;;(catppuccin-reload)
 
 (use-package doom-modeline
 :straight t
@@ -50,22 +48,22 @@
 
 (set-face-attribute 'default nil
   :font "scientifica"
-  :height 120
+  :height 105
   :weight 'medium)
 (set-face-attribute 'variable-pitch nil
   :font "scientifica"
-  :height 120
+  :height 105
   :weight 'medium)
 (set-face-attribute 'fixed-pitch nil
   :font "scientifica"
-  :height 120
+  :height 105
   :weight 'medium)
 (set-face-attribute 'font-lock-comment-face nil
   :slant 'italic)
 (set-face-attribute 'font-lock-keyword-face nil
   :slant 'italic)
-(setq-default line-spacing 0.5)
-(add-to-list 'default-frame-alist '(font . "scientifica-12"))
+(setq-default line-spacing 1.0)
+(add-to-list 'default-frame-alist '(font . "scientica-10.5"))
 (setq global-prettify-symbols-mode t)
 
 (use-package visual-fill-column
@@ -77,19 +75,22 @@
   (("C-x p" . 'visual-fill-column-mode)))
 (add-hook 'visual-line-mode-hook #'visual-fill-column-mode)
 
-
 (use-package evil
-  :straight t
-    :init      ;; tweak evil's configuration before loading it
-    (setq evil-want-integration t) ;; This is optional since it's already set to t by default.
-    (setq evil-want-keybinding nil)
-    (setq evil-vsplit-window-right t)
-    (setq evil-split-window-below t)
-    (evil-mode))
+    :straight t
+      :init      ;; tweak evil's configuration before loading it
+      (setq evil-want-integration t) ;; This is optional since it's already set to t by default.
+      (setq evil-want-keybinding nil)
+      (setq evil-vsplit-window-right t)
+      (setq evil-split-window-below t)
+      (evil-mode))
 
-(use-package evil-nerd-commenter
-  :straight t
+  (use-package evil-nerd-commenter
+    :straight t
+  )
+  (use-package evil-escape
+:straight t
 )
+  (setq-default evil-escape-key-sequence "jk")
 
 (use-package nerd-icons
   :straight t
@@ -101,19 +102,14 @@
   (setq initial-buffer-choice 'dashboard-open)
   (setq dashboard-set-heading-icons t)
   (setq dashboard-set-file-icons t)
-  (setq dashboard-startup-banner "~/Downloads/365030(1).jpg")  ;; use custom image as banner
-  (setq dashboard-center-content nil) ;; set to 't' for centered content
+  (setq dashboard-startup-banner "~/.config/emacs/358760.jpg")  ;; use custom image as banner
+  (setq dashboard-center-content t) ;; set to 't' for centered content
   (setq dashboard-items '((recents . 5)
                           (agenda . 5 )
                           (bookmarks . 3)
-                          (projects . 3)
                           (registers . 3)))
-  :custom 
-  (dashboard-modify-heading-icons '((recents . "file-text")
-				      (bookmarks . "book")))
   :config
   (dashboard-setup-startup-hook))
-
 
 (use-package company
   :straight t
@@ -151,15 +147,6 @@
     "bp" '(previous-buffer :wk "Previous buffer")
     "br" '(revert-buffer :wk "Reload buffer"))
 )
-(leader-keys
-        "n" '(:ignore t :wk "org roam")
-        "n b" '(org-roam-buffer-toggle :wk "Org roam buffer toggle")
-        "n f" '(org-roam-node-find :wk "Org roam buffer toggle")
-        "n g" '(org-roam-graph :wk "Org roam graph")
-        "n i" '(org-roam-node-insert :wk "Org roam insert")
-        "n c" '(org-roam-capture :wk "Org roam capture")
-        "n j" '(org-roam-dailies-capture-today :wk "Org roam dailies")
-)
 
 (leader-keys
     "m" '(:ignore t :wk "Org journal")
@@ -168,7 +155,9 @@
 
 (leader-keys
     "o" '(:ignore t :wk "Org" )
-    "o j" '(helm-org-rifle :wk "Org rifle")
+    "o t" '(org-babel-tangle :wk "Org babel tangle")
+    "o c" '(org-toggle-checkbox :wk "Org babel tangle")
+    "o r" '(helm-org-rifle :wk "Org rifle")
 )
 
 (use-package which-key
@@ -191,7 +180,6 @@
 
 
 (electric-indent-mode -1)
-(require 'org-tempo)
 (defun reload-init-file ()
   (interactive)
   (load-file user-init-file)
@@ -244,55 +232,105 @@
   :hook org-mode prog-mode)
 
 (use-package org-modern
-:straight t
-)
-(with-eval-after-load 'org (global-org-modern-mode))
+    :straight t
+    )
+    (with-eval-after-load 'org (global-org-modern-mode))
+    
+  (modify-all-frames-parameters
+   '((right-divider-width . 40)
+     (internal-border-width . 40)))
+  (dolist (face '(window-divider
+                  window-divider-first-pixel
+                  window-divider-last-pixel))
+    (face-spec-reset-face face)
+    (set-face-foreground face (face-attribute 'default :background)))
+  (set-face-background 'fringe (face-attribute 'default :background))
 
-;; Add frame borders and window dividers
-(modify-all-frames-parameters
- '((right-divider-width . 40)
-   (internal-border-width . 40)))
-(dolist (face '(window-divider
-                window-divider-first-pixel
-                window-divider-last-pixel))
-  (face-spec-reset-face face)
-  (set-face-foreground face (face-attribute 'default :background)))
-(set-face-background 'fringe (face-attribute 'default :background))
+  (setq
+   ;; Edit settings
+   org-auto-align-tags nil
+   org-tags-column 0
+   org-catch-invisible-edits 'show-and-error
+   org-special-ctrl-a/e t
+   org-insert-heading-respect-content t
 
-(setq
- ;; Edit settings
- org-auto-align-tags nil
- org-tags-column 0
- org-catch-invisible-edits 'show-and-error
- org-special-ctrl-a/e t
- org-insert-heading-respect-content t
+   ;; Org styling, hide markup etc.
+   org-hide-emphasis-markers t
+   org-pretty-entities t
+   org-ellipsis "…"
 
- ;; Org styling, hide markup etc.
- org-hide-emphasis-markers t
- org-pretty-entities t
- org-ellipsis "…"
+   ;; Agenda styling
+   org-agenda-tags-column 0
+   org-agenda-block-separator ?─
+   org-agenda-time-grid
+   '((daily today require-timed)
+     (800 1000 1200 1400 1600 1800 2000)
+     " ┄┄┄┄┄ " "┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄")
+   org-agenda-current-time-string
+   "◀── now ─────────────────────────────────────────────────")
 
- ;; Agenda styling
- org-agenda-tags-column 0
- org-agenda-block-separator ?─
- org-agenda-time-grid
- '((daily today require-timed)
-   (800 1000 1200 1400 1600 1800 2000)
-   " ┄┄┄┄┄ " "┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄")
- org-agenda-current-time-string
- "⭠ now ─────────────────────────────────────────────────")
+  (global-org-modern-mode)
 
-(global-org-modern-mode)
+  (use-package calfw
+  :straight t)
+  (use-package calfw-org
+  :straight t)
 
-(setq calendar-week-start-day 1)
-(use-package dired-open
-  :straight t
-  :config
-  (setq dired-open-extensions '(("gif" . "sxiv")
-                                ("jpg" . "sxiv")
-                                ("png" . "sxiv")
-                                ("mkv" . "mpv")
-                                ("mp4" . "mpv"))))
+    (require 'org-tempo)
+    (use-package helm-org-rifle
+    :straight t
+    )
+    (setq backup-directory-alist '((".*" . "~/.local/share/Trash/files")))
+    (add-to-list 'org-agenda-files "org-direcot")
+    (setq org-agenda-files '("~/notes/journal/"))
+
+
+    (use-package toc-org
+      :straight t
+        :commands toc-org-enable
+        :init (add-hook 'org-mode-hook 'toc-org-enable))
+
+    (use-package org-journal
+      :straight t
+    )
+    (setq org-journal-dir "~/notes/journal/")
+    (setq org-journal-date-format "%A, %d %B %Y")
+    (use-package dired-open
+      :straight t
+      :config
+      (setq dired-open-extensions '(("gif" . "sxiv")
+                                    ("jpg" . "sxiv")
+                                    ("png" . "sxiv")
+                                    ("mkv" . "mpv")
+                                    ("mp4" . "mpv"))))
+
+    (use-package org-download
+      :after org
+      :straight t
+      :custom
+      (org-download-method 'directory)
+      (org-download-image-dir "~/notes/Images")
+      (org-download-heading-lvl 0)
+      (org-download-timestamp "org_%Y%m%d-%H%M%S_")
+      (org-image-actual-width 500)
+      (org-download-screenshot-method "xclip -selection clipboard -t image/png -o > '%s'")
+      :bind
+      ("C-M-y" . org-download-screenshot)
+      :config
+      (require 'org-download))
+
+    (use-package org-super-agenda
+    :straight t
+    )
+
+    (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.5))
+(custom-set-faces
+  '(org-level-1 ((t (:inherit outline-1 :height 2.0))))
+  '(org-level-2 ((t (:inherit outline-2 :height 1.8))))
+  '(org-level-3 ((t (:inherit outline-3 :height 1.6))))
+  '(org-level-4 ((t (:inherit outline-4 :height 1.4))))
+  '(org-level-5 ((t (:inherit outline-5 :height 1.0))))
+  )
 
 (use-package peep-dired
   :straight t
@@ -305,52 +343,10 @@
     (evil-define-key 'normal peep-dired-mode-map (kbd "k") 'peep-dired-prev-file)
 )
 
-;; Org mode
-(use-package org-roam
-  :straight t
- )
-(setq org-roam-directory (file-truename "~/notes/"))
-(setq org-roam-file-extensions '("org" "md")) ; enable Org-roam for a markdown extension
-(org-roam-db-autosync-mode 1) ; autosync-mode triggers db-sync. md-roam-mode must be already active
-(setq find-file-visit-truename t)
-(setq org-roam-dailies-directory "~/notes/journal/")
-
-(use-package helm-org-rifle
-:straight t
-)
-(setq backup-directory-alist '((".*" . "~/.local/share/Trash/files")))
-(add-to-list 'org-agenda-files "~/NEET.org")
-
-(use-package toc-org
-  :straight t
-    :commands toc-org-enable
-    :init (add-hook 'org-mode-hook 'toc-org-enable))
-
-(use-package org-journal
-  :straight t
-)
-(setq org-journal-dir "~/notes/journal/")
-(setq org-journal-date-format "%A, %d %B %Y")
-
 (use-package markdown-mode
 :straight t
 :init (setq markdown-command "multimarkdown")
 )
-
-(use-package org-download
-  :after org
-  :straight t
-  :custom
-  (org-download-method 'directory)
-  (org-download-image-dir "~/notes/Images")
-  (org-download-heading-lvl 0)
-  (org-download-timestamp "org_%Y%m%d-%H%M%S_")
-  (org-image-actual-width 600)
-  (org-download-screenshot-method "xclip -selection clipboard -t image/png -o > '%s'")
-  :bind
-  ("C-M-y" . org-download-screenshot)
-  :config
-  (require 'org-download))
 
 (use-package nerd-icons-ibuffer
   :straight t
@@ -361,21 +357,3 @@
 )
 (setq highlight-indent-guides-method 'bitmap)
 (add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
-
-(use-package org-roam-ui
-  :straight
-    (:host github :repo "org-roam/org-roam-ui" :branch "main" :files ("*.el" "out"))
-    :after org-roam
-;;         normally we'd recommend hooking orui after org-roam, but since org-roam does not have
-;;         a hookable mode anymore, you're advised to pick something yourself
-;;         if you don't care about startup time, use
-;;  :hook (after-init . org-roam-ui-mode)
-    :config
-    (setq org-roam-ui-sync-theme t
-          org-roam-ui-follow t
-          org-roam-ui-update-on-save t
-          org-roam-ui-open-on-start t))
-
-(straight-use-package 'catppuccin-theme)
-(load-theme 'catppuccin :no-confirm)
-(setq catppuccin-flavor 'mocha) ;; or 'latte, 'macchiato, or 'mocha
